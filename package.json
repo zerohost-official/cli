@@ -1,0 +1,73 @@
+{
+  "name": "@zerohost/cli",
+  "version": "1.0.0",
+  "description": "Command-line interface for ZeroHost ephemeral text sharing",
+  "main": "src/index.js",
+  "bin": {
+    "zerohost": "./bin/zerohost.js",
+    "zh": "./bin/zerohost.js"
+  },
+  "scripts": {
+    "start": "node bin/zerohost.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build": "node scripts/build.js",
+    "dev": "nodemon bin/zerohost.js",
+    "lint": "eslint src/ bin/ test/",
+    "format": "prettier --write src/ bin/ test/",
+    "prepublishOnly": "npm run lint",
+    "postinstall": "echo 'ZeroHost CLI installed! Run: zerohost --help'"
+  },
+  "keywords": [
+    "cli",
+    "ephemeral",
+    "sharing",
+    "privacy",
+    "security",
+    "pastebin",
+    "text-sharing",
+    "developer-tools"
+  ],
+  "author": "ZeroHost",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerohost-official/cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zerohost-official/cli/issues"
+  },
+  "homepage": "https://zerohost.net",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.6",
+    "clipboardy": "^2.3.0",
+    "qrcode-terminal": "^0.12.0",
+    "configstore": "^5.0.1",
+    "ora": "^5.4.1",
+    "boxen": "^5.1.2",
+    "update-notifier": "^5.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0",
+    "@types/jest": "^29.5.0",
+    "nock": "^13.4.0"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ],
+  "preferGlobal": true
+}
