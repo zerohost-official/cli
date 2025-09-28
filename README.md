@@ -8,13 +8,13 @@ Share text, code, and files securely from your terminal. All shares are automati
 
 ```bash
 # Install globally with npm
-npm install -g @zerohost/cli
+npm install -g zerohost-cli
 
 # Install globally with yarn
-yarn global add @zerohost/cli
+yarn global add zerohost-cli
 
 # Or use npx (no installation required)
-npx @zerohost/cli "Hello, world!"
+npx zerohost-cli "Hello, world!"
 ```
 
 ## Quick Start
@@ -235,10 +235,10 @@ Configuration includes:
 **"Command not found"**
 ```bash
 # Make sure it's installed globally
-npm list -g @zerohost/cli
+npm list -g zerohost-cli
 
 # Or use npx
-npx @zerohost/cli --version
+npx zerohost-cli --version
 ```
 
 **"API key invalid"**

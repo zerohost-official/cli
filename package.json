@@ -1,5 +1,5 @@
 {
-  "name": "@zerohost/cli",
+  "name": "zerohost-cli",
   "version": "1.0.0",
   "description": "Command-line interface for ZeroHost ephemeral text sharing",
   "main": "src/index.js",

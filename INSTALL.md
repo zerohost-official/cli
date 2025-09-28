@@ -6,10 +6,10 @@
 
 ```bash
 # Install globally (when published to npm)
-npm install -g @zerohost/cli
+npm install -g zerohost-cli
 
 # Or use without installing
-npx @zerohost/cli "Hello, world!"
+npx zerohost-cli "Hello, world!"
 ```
 
 ## Development Install
@@ -90,7 +90,7 @@ node /path/to/cli/bin/zerohost.js --help
 
 If you don't want to install globally, use npx:
 ```bash
-npx @zerohost/cli "Hello, world!"
+npx zerohost-cli "Hello, world!"
 ```
 
 ### Environment Variables
