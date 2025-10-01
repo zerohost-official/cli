@@ -44,6 +44,7 @@ zerohost --interactive
 - 🔥 **Burn After Reading**: Self-destruct after first view
 - 🛡️ **Password Protection**: Secure sensitive content
 - 🎯 **Smart Detection**: Auto-detect file types for syntax highlighting
+- 🏷️ **Reference Labels**: Track shares with custom labels (visible in account dashboard)
 
 ## Usage
 
@@ -62,8 +63,11 @@ zerohost "Secret content" --password mypassword
 # Burn after reading
 zerohost "Self-destruct message" --burn
 
+# Add reference label for tracking
+zerohost "Deploy logs" --reference deploy-1
+
 # Combine options
-zerohost "Secret code" --expires 2h --password secret --burn --qr
+zerohost "Secret code" --expires 2h --password secret --burn --qr --reference ticket-42
 ```
 
 ### File Sharing
@@ -142,6 +146,7 @@ Get your API key from your [ZeroHost account dashboard](https://zerohost.net/acc
 | `--expires <time>` | `-e` | Expiry time (1h, 24h, 1w) | `--expires 2h` |
 | `--password <pwd>` | `-p` | Password protect | `--password secret` |
 | `--burn` | `-b` | Burn after reading | `--burn` |
+| `--reference <ref>` | `-r` | Reference label for tracking (max 8 chars) | `--reference deploy-1` |
 | `--interactive` | `-i` | Interactive mode | `--interactive` |
 | `--qr` | `-q` | Show QR code | `--qr` |
 | `--copy` | `-c` | Copy to clipboard | `--copy` |
@@ -156,17 +161,17 @@ Get your API key from your [ZeroHost account dashboard](https://zerohost.net/acc
 ### Development Workflow
 
 ```bash
-# Share build logs
-npm run build 2>&1 | zerohost --expires 1d
+# Share build logs with reference for tracking
+npm run build 2>&1 | zerohost --expires 1d --reference build-42
 
-# Share git diff
-git diff | zerohost --password review --expires 2h
+# Share git diff with password and reference
+git diff | zerohost --password review --expires 2h --reference PR-123
 
-# Share error logs
-tail -100 /var/log/app.log | zerohost --burn
+# Share error logs (burn after reading)
+tail -100 /var/log/app.log | zerohost --burn --reference error-log
 
-# Share configuration
-zerohost --file .env.example --expires 1h --qr
+# Share configuration with tracking label
+zerohost --file .env.example --expires 1h --qr --reference dev-env
 ```
 
 ### System Administration

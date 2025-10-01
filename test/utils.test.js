@@ -33,20 +33,20 @@ describe('Utils', () => {
     test('should format future dates correctly', () => {
       const now = new Date();
 
-      // 1 hour from now
-      const oneHour = new Date(now.getTime() + 60 * 60 * 1000);
+      // 1 hour from now (add extra minute to avoid timing issues)
+      const oneHour = new Date(now.getTime() + 61 * 60 * 1000);
       expect(formatExpiry(oneHour.toISOString())).toBe('1 hour');
 
       // 2 hours from now
-      const twoHours = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+      const twoHours = new Date(now.getTime() + (2 * 60 + 1) * 60 * 1000);
       expect(formatExpiry(twoHours.toISOString())).toBe('2 hours');
 
       // 1 day from now
-      const oneDay = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+      const oneDay = new Date(now.getTime() + (24 * 60 + 1) * 60 * 1000);
       expect(formatExpiry(oneDay.toISOString())).toBe('1 day');
 
       // 3 days from now
-      const threeDays = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000);
+      const threeDays = new Date(now.getTime() + (3 * 24 * 60 + 1) * 60 * 1000);
       expect(formatExpiry(threeDays.toISOString())).toBe('3 days');
     });
 

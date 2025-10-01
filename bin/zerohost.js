@@ -26,6 +26,7 @@ async function main() {
       .option('-e, --expires <time>', 'expiry time (1h, 24h, 1w)', '24h')
       .option('-p, --password <password>', 'protect with password')
       .option('-b, --burn', 'burn after reading')
+      .option('-r, --reference <ref>', 'reference label for tracking (max 8 chars)')
       .option('-i, --interactive', 'interactive mode')
       .option('-q, --qr', 'show QR code')
       .option('-c, --copy', 'copy URL to clipboard')

@@ -148,6 +148,20 @@ class ZeroHostCLI {
       });
     }
 
+    if (!currentOptions.reference) {
+      questions.push({
+        type: 'input',
+        name: 'reference',
+        message: 'Reference label for tracking? (max 8 chars, leave empty for none):',
+        validate: (input) => {
+          if (!input) return true; // Empty is valid
+          if (input.length > 8) return 'Reference must be 8 characters or less';
+          if (!/^[a-zA-Z0-9\-_.]+$/.test(input)) return 'Only letters, numbers, hyphens, underscores, and periods allowed';
+          return true;
+        }
+      });
+    }
+
     questions.push({
       type: 'confirm',
       name: 'qr',
@@ -177,9 +191,12 @@ class ZeroHostCLI {
       answers.expires = customExpiry;
     }
 
-    // Clean up empty password
+    // Clean up empty password and reference
     if (answers.password === '') {
       delete answers.password;
+    }
+    if (answers.reference === '') {
+      delete answers.reference;
     }
 
     return answers;
@@ -193,7 +210,8 @@ class ZeroHostCLI {
         text: content,
         expires_in: options.expires || '24h',
         password: options.password,
-        burn_after_reading: options.burn || false
+        burn_after_reading: options.burn || false,
+        reference: options.reference || null
       };
 
       const result = await this.api.createShare(shareData);

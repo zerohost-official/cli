@@ -46,7 +46,8 @@ describe('ZeroHost CLI', () => {
       expect(mockAPI.createShare).toHaveBeenCalledWith({
         text: 'Hello, world!',
         expires_in: '24h',
-        burn_after_reading: false
+        burn_after_reading: false,
+        reference: null
       });
 
       consoleSpy.mockRestore();
@@ -72,7 +73,8 @@ describe('ZeroHost CLI', () => {
       expect(mockAPI.createShare).toHaveBeenCalledWith({
         text: 'File content test',
         expires_in: '24h',
-        burn_after_reading: false
+        burn_after_reading: false,
+        reference: null
       });
 
       // Clean up
@@ -81,9 +83,16 @@ describe('ZeroHost CLI', () => {
     });
 
     test('should handle file not found error', async() => {
+      // Mock process.exit to prevent test termination
+      const mockExit = jest.spyOn(process, 'exit').mockImplementation(() => {});
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
       await expect(
         cli.run(null, { file: 'nonexistent-file.txt' })
       ).rejects.toThrow('File not found: nonexistent-file.txt');
+
+      mockExit.mockRestore();
+      consoleSpy.mockRestore();
     });
 
     test('should handle empty content error', async() => {
@@ -110,7 +119,8 @@ describe('ZeroHost CLI', () => {
       expect(mockAPI.createShare).toHaveBeenCalledWith({
         text: 'Test content',
         expires_in: '2h',
-        burn_after_reading: false
+        burn_after_reading: false,
+        reference: null
       });
 
       consoleSpy.mockRestore();
@@ -136,7 +146,8 @@ describe('ZeroHost CLI', () => {
         text: 'Secret content',
         expires_in: '24h',
         password: 'mypassword',
-        burn_after_reading: false
+        burn_after_reading: false,
+        reference: null
       });
 
       consoleSpy.mockRestore();
@@ -158,7 +169,8 @@ describe('ZeroHost CLI', () => {
       expect(mockAPI.createShare).toHaveBeenCalledWith({
         text: 'Burn content',
         expires_in: '24h',
-        burn_after_reading: true
+        burn_after_reading: true,
+        reference: null
       });
 
       consoleSpy.mockRestore();
@@ -168,6 +180,32 @@ describe('ZeroHost CLI', () => {
       await expect(
         cli.run('Test', { expires: 'invalid' })
       ).rejects.toThrow('Invalid expiry time');
+    });
+
+    test('should handle reference labels', async() => {
+      const mockResponse = {
+        id: 'test123',
+        url: 'https://zerohost.net/share/test123',
+        expires_at: '2024-01-01T12:00:00Z'
+      };
+
+      mockAPI.createShare.mockResolvedValue(mockResponse);
+
+      const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+
+      await cli.run('Test content', {
+        reference: 'deploy-1',
+        silent: true
+      });
+
+      expect(mockAPI.createShare).toHaveBeenCalledWith({
+        text: 'Test content',
+        expires_in: '24h',
+        burn_after_reading: false,
+        reference: 'deploy-1'
+      });
+
+      consoleSpy.mockRestore();
     });
   });
 
