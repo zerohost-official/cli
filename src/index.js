@@ -6,7 +6,7 @@ const qrcode = require('qrcode-terminal');
 const Configstore = require('configstore');
 const ora = require('ora');
 const boxen = require('boxen');
-const updateNotifier = require('update-notifier');
+const updateNotifier = require('update-notifier-cjs');
 
 const ZeroHostAPI = require('./api');
 const { validateExpiry, formatExpiry, readStdin } = require('./utils');

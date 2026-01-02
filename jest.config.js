@@ -21,5 +21,9 @@ module.exports = {
       lines: 80,
       statements: 80
     }
+  },
+  // Mock update-notifier in tests to avoid actual update checks
+  moduleNameMapper: {
+    '^update-notifier-cjs$': '<rootDir>/test/__mocks__/update-notifier.js'
   }
 };
