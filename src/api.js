@@ -64,7 +64,7 @@ class ZeroHostAPI {
         expires_in: '1h'
       });
       return true;
-    } catch (testError) {
+    } catch (_e) {
       throw new Error('API connection test failed');
     }
   }

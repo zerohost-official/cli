@@ -261,7 +261,7 @@ class ZeroHostCLI {
       try {
         await clipboardy.write(result.url);
         console.log(chalk.gray('📋 URL copied to clipboard'));
-      } catch (error) {
+      } catch (_e) {
         console.log(chalk.gray('Failed to copy to clipboard'));
       }
     }
@@ -297,7 +297,7 @@ class ZeroHostCLI {
       spinner.succeed('Authentication successful!');
 
       console.log(chalk.green('\n✓ API key saved. You can now use premium features.'));
-    } catch (error) {
+    } catch (_e) {
       spinner.fail('Authentication failed');
       throw new Error('Invalid API key or connection failed');
     }
